@@ -24,4 +24,9 @@ El GYM-Class de paloquemao presenta una dificultad por parte los usuarios, para 
 Se debe ayudar a los gerentes a manejar su GYM a distancia, más específico desde el celular, y ayudar a los usuarios con el conocimiento sobre todo lo relacionado con el gimnasio, como: dietas, rutinas, entrenadores, horarios y facilitando el manejo de este.
 ## Justificación
 Al implementar un sistema de información que se busca facilitar el manejo del GYM, y ayude al control de usuarios y su conocimiento, colaborando con los entrenadores y gerentes para una eficaz eficiencia.  
+## Integrantes
+- Colorado Ortiz Diego Armando
+- Lagos Nossa Dehiby Stiven
+- Mendez Mora Cristhian  Camilo 
+- Paez Castro Harold Camilo 
 
