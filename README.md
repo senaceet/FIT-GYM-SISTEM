@@ -1,7 +1,7 @@
 # FIT-GYM SYSTEM
 ## Nombres del Proyecto
 ### Nombre del proyecto: 
-Sistema de información que ayude a la manipulación de un GYM
+Sistema de información que ayude al manejo de un GYM
 ### Nombre Aplicativo:
 “FIT-GYM SYSTEM”
 ## Componente Metodológico 
