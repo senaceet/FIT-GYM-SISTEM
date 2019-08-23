@@ -26,7 +26,6 @@ Se debe ayudar a los gerentes a manejar su GYM a distancia, más específico des
 Al implementar un sistema que se busca intelectualizar el manejo del GYM, y que ayude al control de usuarios y su conocimiento, colaborando con los entrenadores y gerentes para una eficaz eficiencia.  
 ## Integrantes
 - Colorado Ortiz Diego Armando
-- Lagos Nossa Dehiby Stiven
 - Mendez Mora Cristhian  Camilo 
-- Paez Castro Harold Camilo 
+- Páez Castro Harold Camilo 
 
