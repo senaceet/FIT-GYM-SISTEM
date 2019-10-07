@@ -66,17 +66,17 @@ primary key (id_carro_compras)
 );
 
 -- Campos Foraneos --
-alter table FGS_carro_compras add constraint fk_id_producto foreign key (id_producto) references FGS.producto (id_producto) on update cascade;
-alter table FGS_carro_compras add constraint fk_id_tipo_de_pago foreign key (id_tipo_de_pago) references FGS.tipo_de_pago (id_tipo_de_pago) on update cascade;
+alter table FGS_carro_compras add constraint fk_id_producto foreign key (id_producto) references FGS_producto (id_producto) on update cascade;
+alter table FGS_carro_compras add constraint fk_id_tipo_de_pago foreign key (id_tipo_de_pago) references FGS_tipo_de_pago (id_tipo_de_pago) on update cascade;
 alter table FGS_carro_compras add index fk_id_tipo_de_pago_idx (id_tipo_de_pago);
 alter table FGS_carro_compras add index fk_id_producto_idx (id_producto);
 
 create table FGS_usuario(
 numero_documento bigint (15) not null,
 primer_nombre_usuario varchar (30) not null,
-segundo_nombre_usuario varchar (30) not null,
+segundo_nombre_usuario varchar (30),
 primer_apellido_usuario varchar (30) not null,
-segundo_apellido_usuario varchar (30) not null,
+segundo_apellido_usuario varchar (30),
 correo_usuario varchar (30) not null unique,
 fecha_nacimiento date not null,
 peso_usuario float (5) not null,
@@ -88,8 +88,8 @@ id_tipo_documento tinyint (5) not null
 );
 
 -- Campos Foraneos --
-alter table FGS_usuario add constraint fk_id_rol foreign key (id_rol) references FGS.rol (id_rol) on update cascade;
-alter table FGS_usuario add constraint fk_id_tipo_documento foreign key (id_tipo_documento) references FGS.tipo_documento (id_tipo_documento) on update cascade;
+alter table FGS_usuario add constraint fk_id_rol foreign key (id_rol) references FGS_rol (id_rol) on update cascade;
+alter table FGS_usuario add constraint fk_id_tipo_documento foreign key (id_tipo_documento) references FGS_tipo_documento (id_tipo_documento) on update cascade;
 alter table FGS_usuario add index fk_id_rol_idx (id_rol);
 alter table FGS_usuario add index fk_id_tipo_documento_idx (id_tipo_documento);
 alter table FGS_usuario add primary key (numero_documento, id_tipo_documento);
@@ -105,9 +105,9 @@ primary key (id_factura)
 );
 
 -- Campos Foraneos --
-alter table FGS_factura add constraint fk_usuario foreign key (numero_documento, id_tipo_documento) references FGS.usuario (numero_documento, id_tipo_documento) on update cascade;
+alter table FGS_factura add constraint fk_usuario foreign key (numero_documento, id_tipo_documento) references FGS_usuario (numero_documento, id_tipo_documento) on update cascade;
 alter table FGS_factura add index fk_usuario_idx (numero_documento, id_tipo_documento);
-alter table FGS_factura add constraint fk_id_carro_compras foreign key (id_carro_compras) references FGS.carro_compras (id_carro_compras) on update cascade;
+alter table FGS_factura add constraint fk_id_carro_compras foreign key (id_carro_compras) references FGS_carro_compras (id_carro_compras) on update cascade;
 alter table FGS_factura add index fk_id_carro_compras_idx (id_carro_compras);
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -119,7 +119,7 @@ primary key (id_envio)
 );
 
 -- Campos Foraneos --
-alter table FGS_envio add constraint fk_id_factura foreign key (id_factura) references FGS.envio (id_factura) on update cascade;
+alter table FGS_envio add constraint fk_id_factura foreign key (id_factura) references FGS_factura (id_factura) on update cascade;
 alter table FGS_envio add index fk_id_factura_idx (id_factura);
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -135,7 +135,7 @@ primary key (id_producto)
 );
 
 -- Campos Foraneos --
-alter table FGS_producto add constraint fk_id_proveedor foreign key (id_proveedor) references FGS.proveedor (id_proveedor) on update cascade;
+alter table FGS_producto add constraint fk_id_proveedor foreign key (id_proveedor) references FGS_proveedor (id_proveedor) on update cascade;
 alter table FGS_producto add index fk_id_proveedor_idx (id_proveedor);
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -148,8 +148,8 @@ id_dietas tinyint(5) not null
 );
 
 -- Campos Foraneos --
-alter table FGS_usuario_dietas add constraint fk_usuario foreign key (numero_documento, id_tipo_documento) references FGS.usuario (numero_documento, id_tipo_documento) on update cascade;
-alter table FGS_usuario_dietas add constraint fk_id_dietas foreign key (id_dietas) references FGS.dietas (id_dietas) on update cascade;
+alter table FGS_usuario_dietas add constraint fk_usuario foreign key (numero_documento, id_tipo_documento) references FGS_usuario (numero_documento, id_tipo_documento) on update cascade;
+alter table FGS_usuario_dietas add constraint fk_id_dietas foreign key (id_dietas) references FGS_dietas (id_dietas) on update cascade;
 alter table FGS_usuario_dietas add primary key (numero_documento, id_tipo_documento, id_dietas);
 alter table FGS_usuario_dietas add index fk_usuario_idx (numero_documento, id_tipo_documento);
 alter table FGS_usuario_dietas add index fk_id_dietas_idx (id_dietas);
@@ -162,8 +162,8 @@ id_rutinas tinyint(5) not null
 );
 
 -- Campos Foraneos --
-alter table FGS_usuario_rutinas add constraint fk_usuario foreign key (numero_documento, id_tipo_documento) references FGS.usuario (numero_documento, id_tipo_documento) on update cascade;
-alter table FGS_usuario_rutinas add constraint fk_id_rutinas foreign key (id_rutinas) references FGS.rutinas (id_rutinas) on update cascade;
+alter table FGS_usuario_rutinas add constraint fk_usuario foreign key (numero_documento, id_tipo_documento) references FGS_usuario (numero_documento, id_tipo_documento) on update cascade;
+alter table FGS_usuario_rutinas add constraint fk_id_rutinas foreign key (id_rutinas) references FGS_rutinas (id_rutinas) on update cascade;
 alter table FGS_usuario_rutinas add primary key (numero_documento, id_tipo_documento, id_rutinas);
 alter table FGS_usuario_rutinas add index fk_usuario_idx (numero_documento, id_tipo_documento);
 alter table FGS_usuario_rutinas add index fk_id_rutinas_idx (id_rutinas);
@@ -176,8 +176,8 @@ id_producto int (10) not null
 );
 
 -- Campos Foraneos --
-alter table FGS_usuario_producto add constraint fk_usuario foreign key (numero_documento, id_tipo_documento) references FGS.usuario (numero_documento, id_tipo_documento) on update cascade;
-alter table FGS_usuario_producto add constraint fk_id_producto foreign key (id_producto) references FGS.producto (id_producto) on update cascade;
+alter table FGS_usuario_producto add constraint fk_usuario foreign key (numero_documento, id_tipo_documento) references FGS_usuario (numero_documento, id_tipo_documento) on update cascade;
+alter table FGS_usuario_producto add constraint fk_id_producto foreign key (id_producto) references FGS_producto (id_producto) on update cascade;
 alter table FGS_usuario_producto add primary key (numero_documento, id_tipo_documento, id_producto);
 alter table FGS_usuario_producto add index fk_usuario_idx (numero_documento, id_tipo_documento);
 alter table FGS_usuario_producto add index fk_id_producto_idx (id_producto); 
@@ -190,8 +190,8 @@ id_plan tinyint(5) not null
 ); 
 
 -- Campos Foraneos --
-alter table FGS_usuario_plan add constraint fk_usuario foreign key (numero_documento, id_tipo_documento) references FGS.usuario (numero_documento, id_tipo_documento) on update cascade;
-alter table FGS_usuario_plan add constraint fk_id_plan foreign key (id_plan) references FGS.planes (id_plan) on update cascade;
+alter table FGS_usuario_plan add constraint fk_usuario foreign key (numero_documento, id_tipo_documento) references FGS_usuario (numero_documento, id_tipo_documento) on update cascade;
+alter table FGS_usuario_plan add constraint fk_id_plan foreign key (id_plan) references FGS_planes (id_plan) on update cascade;
 alter table FGS_usuario_plan add primary key (numero_documento, id_tipo_documento, id_plan);
 alter table FGS_usuario_plan add index fk_usuario_idx (numero_documento, id_tipo_documento);
 alter table FGS_usuario_plan add index fk_id_plan_idx (id_plan); 
@@ -203,8 +203,8 @@ id_plan tinyint(5) not null
 );
 
 -- Campos Foraneos --
-alter table FGS_plan_tipo_de_pago add constraint fk_id_tipo_de_pago foreign key (id_tipo_de_pago) references FGS.tipo_de_pago (id_tipo_de_pago) on update cascade;
-alter table FGS_plan_tipo_de_pago add constraint fk_id_plan foreign key (id_plan) references FGS.planes (id_plan) on update cascade;
+alter table FGS_plan_tipo_de_pago add constraint fk_id_tipo_de_pago foreign key (id_tipo_de_pago) references FGS_tipo_de_pago (id_tipo_de_pago) on update cascade;
+alter table FGS_plan_tipo_de_pago add constraint fk_id_plan foreign key (id_plan) references FGS_planes (id_plan) on update cascade;
 alter table FGS_plan_tipo_de_pago add primary key (id_tipo_de_pago, id_plan);
 alter table FGS_plan_tipo_de_pago add index fk_id_tipo_de_pago_idx (id_tipo_de_pago);
 alter table FGS_plan_tipo_de_pago add index fk_id_plan_idx (id_plan);
